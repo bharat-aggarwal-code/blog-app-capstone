@@ -1,0 +1,53 @@
+<%- include('partials/header.ejs') %>
+<div class="form-container">
+  <h2>Create New Post</h2>
+  <form action="/create" method="post" class="create-post" id="postForm">
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" required />
+
+    <br /><br />
+
+    <label for="title">Post Title:</label>
+    <input type="text" id="title" name="title" required />
+
+    <br /><br />
+
+    <div class="form-group">
+      <label for="content">Blog Content (supports Markdown/HTML):</label>
+      <!-- <input type="textarea" id="content" name="content" required /> -->
+      <!-- <textarea id="content" name="content" rows="10" required></textarea> -->
+      <div id="editor"></div>
+      <input type="hidden" name="content" id="content-input" />
+    </div>
+
+    <br /><br />
+
+    <label for="slug">Post Slug:</label>
+    <input
+      type="text"
+      name="slug"
+      pattern="^\S*$"
+      title="Spaces, tabs, or newlines are not allowed."
+      required
+    />
+
+    <br /><br />
+
+    <input type="submit" value="Create Post" />
+  </form>
+</div>
+<div class="all-post">
+  <h2>All Posts</h2>
+  <div class="post">
+    <h3><%= locals.title %></h3>
+    <p>
+      <span>Post Date: <%= locals.completeDate %></span>
+      <span>Author: <%= locals.author %></span>
+    </p>
+    <div class="post-content">
+      <p><%- locals.content %></p>
+    </div>
+    <a href="#">Read more...</a>
+  </div>
+</div>
+<%- include('partials/footer.ejs') %>
